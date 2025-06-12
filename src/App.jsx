@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import AddTask from './pages/AddTask';
+import EditTask from './pages/EditTask';
+import NotFound from './pages/NotFound';
+import { getUserSession } from './utils/localStorageHelpers';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
+const PrivateRoute = ({ children }) => {
+  const user = getUserSession();
+  if (!user) {
+    return <Navigate to="/login" state={{ message: "You must log in first to access this page." }} replace />;
+  }
+  return children;
+};
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Provider store={store}>
+      <Router>
+        <div className="app-container">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+            <Route path="/add" element={<PrivateRoute><AddTask /></PrivateRoute>} />
+            <Route path="/edit/:id" element={<PrivateRoute><EditTask /></PrivateRoute>} />
+            <Route path="/404" element={<NotFound />} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="*" element={<Navigate to="/404" replace />} />
+          </Routes>
+        </div>
+      </Router>
+    </Provider>
+  );
 }
 
-export default App
+export default App; 

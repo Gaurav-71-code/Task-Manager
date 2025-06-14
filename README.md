@@ -1,12 +1,61 @@
-# React + Vite
+# Task Manager Pro:- *G-ToDo*
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and efficient task management web application built with React and Vite.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Create, edit, and delete tasks
+- Organize tasks with categories and priorities
+- User-friendly dashboard interface
+- Responsive design for all devices
+- Local storage for data persistence
+- Clean and intuitive user interface
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 19
+- Vite 6
+- Modern JavaScript (ES6+)
+- CSS3 for styling
+- Local Storage for data management
+
+
+## Project Structure
+
+```
+task-manager-pro/
+├── public/
+│   └── task-management-svgrepo-com.svg
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── redux/
+│   ├── utils/
+│   ├── App.jsx
+│   ├── App.css
+│   ├── main.jsx
+│   └── index.css
+├── package.json
+└── README.md
+```
+
+## Features in Detail
+
+- **Task Management**: Create, edit, and delete tasks with ease
+- **Dashboard**: Overview of all your tasks in one place
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Data Persistence**: Tasks are saved in local storage
+- **Modern UI**: Clean and intuitive user interface
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Author
+
+*Gaurav Kaushik*

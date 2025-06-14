@@ -17,7 +17,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user) {
-      // Load tasks from localStorage on component mount
       const savedTasks = loadTasksFromStorage(user.id);
       if (savedTasks.length > 0) {
         dispatch(setTasks(savedTasks));
@@ -61,9 +60,26 @@ const Dashboard = () => {
   return (
     <Container fluid className="dashboard p-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>Task Manager Pro</h2>
+        <div className="d-flex align-items-center">
+          <img 
+            src="/task-management-svgrepo-com.svg" 
+            alt="G-ToDo Logo" 
+            style={{ 
+              width: '40px', 
+              height: '40px', 
+              marginRight: '10px',
+              filter: 'invert(67%) sepia(31%) saturate(638%) hue-rotate(89deg) brightness(89%) contrast(87%)'
+            }}
+          />
+          <h2 className="mb-0" style={{ color: '#8cc751' }}>G-ToDo</h2>
+        </div>
         <div>
-          <Button variant="primary" className="me-2" onClick={() => navigate('/add')}>
+          <Button 
+            variant="success" 
+            className="me-2" 
+            onClick={() => navigate('/add')}
+            style={{ backgroundColor: '#8cc751', borderColor: '#8cc751' }}
+          >
             Add Task
           </Button>
           <Button variant="outline-danger" onClick={handleLogout}>

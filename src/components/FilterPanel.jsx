@@ -32,11 +32,11 @@ const FilterPanel = () => {
       
       <div className="mb-3">
         <h6>Priority</h6>
-        {['High', 'Medium', 'Low'].map((priority) => (
+        {['high', 'medium', 'low'].map((priority) => (
           <Form.Check
             key={priority}
             type="checkbox"
-            label={priority}
+            label={priority.charAt(0).toUpperCase() + priority.slice(1)}
             checked={filters.priority.includes(priority)}
             onChange={() => handlePriorityChange(priority)}
             className="mb-2"

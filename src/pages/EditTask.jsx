@@ -41,8 +41,7 @@ const EditTask = () => {
     }));
   };
 
-  // Helper function to calculate time remaining
-  const calculateTimeRemaining = (dueDate) => {
+  function calculateTimeRemaining(dueDate) {
     if (!dueDate) return 'No due date';
     
     const now = new Date();
@@ -58,85 +57,106 @@ const EditTask = () => {
     if (days > 0) return `${days}d ${hours}h remaining`;
     if (hours > 0) return `${hours}h ${minutes}m remaining`;
     return `${minutes}m remaining`;
-  };
+  }
 
   return (
-    <Container className="py-5">
-      <Card className="shadow-sm">
-        <Card.Body>
-          <h2 className="text-center mb-4">Edit Task</h2>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="text"
-                name="title"
-                value={task.title}
-                onChange={handleChange}
-                required
-                placeholder="Enter task title"
-              />
-            </Form.Group>
+    <Container className="py-4">
+      <Card className="p-4">
+        <h2 className="mb-4">Edit Task</h2>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Title</Form.Label>
+            <Form.Control
+              type="text"
+              name="title"
+              value={task.title}
+              onChange={handleChange}
+              required
+              placeholder="Enter task title"
+            />
+          </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                name="description"
-                value={task.description}
-                onChange={handleChange}
-                rows={3}
-                placeholder="Enter task description"
-              />
-            </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              name="description"
+              value={task.description}
+              onChange={handleChange}
+              rows={3}
+              placeholder="Enter task description"
+            />
+          </Form.Group>
 
+          <Form.Group className="mb-3">
+            <Form.Label>Priority</Form.Label>
+            <Form.Select
+              name="priority"
+              value={task.priority}
+              onChange={handleChange}
+            >
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Status</Form.Label>
+            <Form.Select
+              name="status"
+              value={task.status}
+              onChange={handleChange}
+            >
+              <option value="To Do">To Do</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Due Date</Form.Label>
+            <Form.Control
+              type="datetime-local"
+              name="dueDate"
+              value={task.dueDate}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Check
+              type="checkbox"
+              name="isRecurring"
+              label="Recurring Task"
+              checked={task.isRecurring}
+              onChange={handleChange}
+            />
+          </Form.Group>
+
+          {task.isRecurring && (
             <Form.Group className="mb-3">
-              <Form.Label>Priority</Form.Label>
+              <Form.Label>Recurring Interval</Form.Label>
               <Form.Select
-                name="priority"
-                value={task.priority}
+                name="recurringInterval"
+                value={task.recurringInterval}
                 onChange={handleChange}
               >
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
               </Form.Select>
             </Form.Group>
+          )}
 
-            <Form.Group className="mb-3">
-              <Form.Label>Status</Form.Label>
-              <Form.Select
-                name="status"
-                value={task.status}
-                onChange={handleChange}
-              >
-                <option value="To Do">To Do</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-              </Form.Select>
-            </Form.Group>
-
-            <Form.Group className="mb-4">
-              <Form.Label>Due Date</Form.Label>
-              <Form.Control
-                type="datetime-local"
-                name="dueDate"
-                value={task.dueDate ? new Date(task.dueDate).toISOString().slice(0, 16) : ''}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-
-            <div className="d-flex justify-content-between">
-              <Button variant="secondary" onClick={() => navigate('/dashboard')}>
-                Cancel
-              </Button>
-              <Button variant="primary" type="submit">
-                Save Changes
-              </Button>
-            </div>
-          </Form>
-        </Card.Body>
+          <Button variant="primary" type="submit" className="me-2">
+            Save Changes
+          </Button>
+          <Button variant="secondary" onClick={() => navigate('/dashboard')}>
+            Cancel
+          </Button>
+        </Form>
       </Card>
     </Container>
   );
